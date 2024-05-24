@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(120deg, #89f7fe, #66a6ff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0;
+            animation: backgroundAnimation 15s ease infinite;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-color: #89f7fe; }
+            50% { background-color: #66a6ff; }
+            100% { background-color: #89f7fe; }
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card-subtitle {
+            font-size: 24px;
+            color: #6c757d;
+        }
+
+        .card-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            margin-bottom: 10px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <form method="POST" class="mb-3">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" name="city" class="form-control" placeholder="Enter City">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ temp }}°C</h2>
+            <h3 class="card-subtitle mb-2 text-muted">{{ city }}</h3>
+            <p class="card-text">{{ description }}</p>
+            <p>
+                <img src="http://openweathermap.org/img/w/{{ icon }}.png" width="50px" alt="">
+            </p>
+            <p>{{ day }}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
